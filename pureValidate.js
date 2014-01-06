@@ -37,6 +37,15 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
             }
         }
 
+        //taken from jQuery library
+        this.inArray = function inArray(needle, haystack) {
+            var length = haystack.length;
+            for(var i = 0; i < length; i++) {
+                if(haystack[i] == needle) return true;
+            }
+            return false;
+        }
+
         this.getLabel = function getLabel(node) {
                     if (node.previousSibling.nodeType === 1 && node.previousSibling.tagName === "LABEL")
                         return node.previousSibling;
@@ -72,9 +81,17 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
                         var txtNode = document.createTextNode(" " + msgText);
                         spanInner.appendChild(txtNode);
                         var existingSpan = document.getElementById(key + "_validate");
-                        /* Only append span if it doesn't exist*/
-                        if (assocLabel.getElementsByTagName('span').length === 0) {
-                        assocLabel.appendChild(spanInner);
+                        /* Only append span if it doesn't exist and innerHTML appended is unique*/
+                        if (existingSpan === null) {
+                            //check all over span HTML to be able to compare with new span
+                            var spanLabel = assocLabel.getElementsByTagName('span');
+                            var compArray = new Array();
+                            for (var j = 0; j < spanLabel.length; j++) {
+                                compArray.push(spanLabel[j].innerHTML);
+                            }
+                            if (!Validator.inArray(spanInner.innerHTML,compArray)) {
+                                assocLabel.appendChild(spanInner);
+                            }
                         }
                         else {
                             /*Check to make sure existing span is not null, if it is do nothing*/
@@ -95,12 +112,15 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
                 /* Handle submit buttons and resetting on change here*/
                 inputs[i].onclick = function() {
                    Validator.validate();
+                   debug.innerHTML = isValid;
                    if (isValid && ajaxFunction === undefined) {
                     form.submit();
                    }
                    else if (isValid) {
                     ajaxFunction(); 
                    }
+                   //reset isValid
+                   isValid = true;
                 };
             }
         }
