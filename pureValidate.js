@@ -73,13 +73,16 @@ var pureValidate = function(conditions, formElement) {
                         spanInner.appendChild(txtNode);
                         var existingSpan = document.getElementById(key + "_validate");
                         /* Only append span if it doesn't exist*/
-                        if (existingSpan === null) {
+                        if (assocLabel.getElementsByTagName('span').length === 0) {
                         assocLabel.appendChild(spanInner);
                         }
                         else {
+                            /*Check to make sure existing span is not null, if it is do nothing*/
+                            if (existingSpan !== null) {
                             /* if it does exist check to see if message needs to be changed or not*/
-                            if (existingSpan.innerHTML !== " " + msgText) {
-                                existingSpan.innerHTML = " " + msgText;
+                                if (existingSpan.innerHTML !== " " + msgText) {
+                                    existingSpan.innerHTML = " " + msgText;
+                                }
                             } 
                         }
                     }

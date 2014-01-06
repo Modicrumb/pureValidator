@@ -24,6 +24,12 @@ $(document).ready(function() {
             match: {
                 user_email:"Please make sure emails are identical"
             }
+        },
+        phone_area: {
+        	empty: "Please enter a phone number"
+        },
+        phone_number: {
+        	empty: "Please enter a phone number"
         }
     };
     var newUserForm = document.getElementById('new-user-form');
@@ -50,6 +56,8 @@ $(document).ready(function() {
 		<input id="user_confirmEmail"  type="email" />
 	</div>
     <label for="ding-dong"> Ding Dong </label>
+    <input id="phone_area" type="text" />
+    <input id="phone_number" type="text" />
 	<input class="form-submit" name="commit" type="button" value="CREATE USER" />
 </form>
 
