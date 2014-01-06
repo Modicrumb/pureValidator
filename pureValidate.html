@@ -5,6 +5,10 @@
 <script type="text/javascript" src="pureValidate.js"></script>
 <script>
 $(document).ready(function() {
+	function bodyBlack() {
+		$('body').css('background','black');
+		$('body').css('color','white');
+	}
     var userConditions = {
         user_username: { 
             empty: "Please provide a username"
@@ -33,7 +37,7 @@ $(document).ready(function() {
         }
     };
     var newUserForm = document.getElementById('new-user-form');
-    var userForm = new pureValidate(userConditions, newUserForm);
+    var userForm = new pureValidate(userConditions, newUserForm, bodyBlack)
 });
 </script>
 </head>
