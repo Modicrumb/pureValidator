@@ -1,3 +1,9 @@
+/** pureValidate Created by Richard Sacco 2014 
+*** Released under MIT lisence http://opensource.org/licenses/MIT
+***/
+
+
+
 var pureValidate = function(conditions, formElement, ajaxFunction) {
         //variables taken via constructor
         this.conditions = conditions;
