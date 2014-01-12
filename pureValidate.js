@@ -112,7 +112,6 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
                 /* Handle submit buttons and resetting on change here*/
                 inputs[i].onclick = function() {
                    Validator.validate();
-                   debug.innerHTML = isValid;
                    if (isValid && ajaxFunction === undefined) {
                     form.submit();
                    }
