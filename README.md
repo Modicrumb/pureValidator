@@ -73,10 +73,11 @@ Your conditionOptions would look like:
 Since both conditions have exactly the same messages only one will appear if the fields are empty and submit is clicked, only one unique message per condition appears, if two messages are the same they won't appear in the same label.
 
 Okay let's put it together now:
-First include the pureValidate function (pureValidate.js) in the head of your document, or in the bottom of the body if you are feeling like that's what is cool.
-Second set up your conditions. 
-Third grab the form object. var form = document.getElementById('form1'); for example
-Instantiate the function: 
+
+* First include the pureValidate function (pureValidate.js) in the head of your document, or in the bottom of the body if you are feeling like that's what is cool.
+* Second set up your conditions. 
+* Third grab the form object. var form = document.getElementById('form1'); for example
+* Instantiate the function: 
 
     var phoneValidate = new pureValidate(conditions, form)
 
