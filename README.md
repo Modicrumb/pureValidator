@@ -11,7 +11,7 @@ There are a few rules to follow if you plan on using pureValidate dealing with H
 1.    Every input specified (for validation) should have a unique ID as well as a preceding label
 2.    input Ids can't have dashes in them - 
 3.    Form submission must not be allowed except through javaScript, pureValidate doesn't do this on it's own (Maybe it will later!)
-4.    That's actually it I guess
+4.    Form submit button must be an input with type="submit"
 
 Using the Validator
 -------------------
