@@ -2,18 +2,32 @@
 *** Released under MIT lisence http://opensource.org/licenses/MIT
 ***/
 
-
+/** Creates an instance of pureValidate
+*** 
+*** @constructor
+*** @this {pureValidate}
+*** @param {object} conditions, object describing inputs, conditions to check against, and alert messages
+*** @param {element} formElement, form for conditions to be operated on
+*** @param optional {function} ajaxFunction, function without parens to be executed replacing form.submit()
+***
+***/
 
 var pureValidate = function(conditions, formElement, ajaxFunction) {
-        //variables taken via constructor
-        this.conditions = conditions;
-        this.formElement = formElement;
-        //setting variables up
+
+        this.conditions = conditions;   //adding conditions parameter to pureValidate object
+        this.formElement = formElement; //adding form parameter to pureValidate object
+
         var form = this.formElement,
         inputs = form.getElementsByTagName('input'),
         isValid = true,
         Validator = this;
 
+        /** Goes through all specified condition options and acts accordingly
+        *** 
+        *** @param {object} conditionOptions, object describing conditions to check against, and alert messages specific to inputs
+        *** @param {element} input, input being operated on
+        *** return message string to output into a span
+        ***/
         this.conditionCheck = function conditionCheck(conditionOptions , input) {
             if (conditionOptions.hasOwnProperty('empty')) {
                 if (input.value == "") {
@@ -43,7 +57,12 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
             }
         }
 
-        //taken from jQuery library
+        /** Taken from jQuery library checks values in a one dimensional array
+        *** 
+        *** @param {toSearch} needle, can be anything to be searched in another array
+        *** @param {array} haystack, one dimensional array to search through
+        *** return true or false, true if needle is found in array, false otherwise
+        ***/
         this.inArray = function inArray(needle, haystack) {
             var length = haystack.length;
             for(var i = 0; i < length; i++) {
@@ -52,6 +71,11 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
             return false;
         }
 
+        /** Grabs label right before various input, recursive function because uses dom level 1 previousSibling
+        *** 
+        *** @param {node} node, object describing conditions to check against, and alert messages specific to inputs
+        *** return label element
+        ***/
         this.getLabel = function getLabel(node) {
                     if (node.previousSibling.nodeType === 1 && node.previousSibling.tagName === "LABEL")
                         return node.previousSibling;
@@ -59,7 +83,12 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
                         var node = node.previousSibling;
                         return getLabel(node); 
                 }
-        
+
+        /** Resets the span message within an input to be null
+        *** 
+        *** @param {element} input, object describing conditions to check against, and alert messages specific to inputs
+        *** return label element
+        ***/
         this.resetMessage = function resetMessage(input) {
             var thisKey = input.getAttribute('id');
             var innerSpan = document.getElementById(thisKey + "_validate")
@@ -68,6 +97,13 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
             }
         }
 
+         /** Function at the heart of pureValidate
+        *** 
+        *** operates on conditionOptions and invokes resetMessage onchange on inputs specified
+        *** invokes conditionCheck to get message based on value that is currently in input
+        *** intelligently creates message alert spams and removes span text
+        ***
+        ***/
         this.validate = function validate() {
             for (var key in Validator.conditions) {
                 if (Validator.conditions.hasOwnProperty(key)) {
@@ -112,7 +148,13 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
                 }
             }
         }
-        /* Find the submit button*/
+
+        /** Most "functional code" in pureValidate
+        *** algorithmically finds submit button based on the type attribute (finds button with submit type)
+        *** invokes validate on submit button click, note that it does not block a form from sending, rails or cake can do this
+        *** if isValid is false it doesn't submit, if ajaxFunction is defined it uses that function instead of submit 
+        ***
+        **/
         for (var i=0; i < inputs.length; i++) {
             if (inputs[i].getAttribute('type') === 'submit' || inputs[i].getAttribute('type') === 'button') {
                 /* Handle submit buttons and resetting on change here*/
