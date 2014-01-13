@@ -23,7 +23,6 @@ The Validator takes 3 parameters and currently it only checks against 3 conditio
 3.    match: whether an input matches another
 
 Wow, how do I use it already?
-
 Good question Brochacho, the pureValidate function takes 3 parameters:
 
 1.    conditionOptions object you create =)
