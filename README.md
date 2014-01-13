@@ -51,13 +51,16 @@ Creating the conditionOptions - Here I will create an example conditionOption sh
 
 Now suppose you want 1 label to handle 2 inputs, that is possible but keep the following in mind: 
 If you want one message to show for one condition on 2 inputs ex:
+
 	<form id="form1">
 		<label> This label is for the phoneArea and for the Number </label>
 		<input id="phoneArea" type="text" />
 		<input id="phoneNum" type="text" />
 		<input type="submit" />
 	</form>
+
 Your conditionOptions would look like: 
+
     var conditions = {
     	phoneArea: {
     		empty: "This field is empty"
