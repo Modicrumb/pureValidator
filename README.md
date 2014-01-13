@@ -17,6 +17,7 @@ Using the Validator
 -------------------
 
 The Validator takes 3 parameters and currently it only checks against 3 conditions:
+
 1.    empty: whether an input is empty or not
 2.    regex: whether an input matches a regex
 3.    match: whether an input matches another
@@ -24,6 +25,7 @@ The Validator takes 3 parameters and currently it only checks against 3 conditio
 Wow, how do I use it already?
 
 Good question Brochacho, the pureValidate function takes 3 parameters:
+
 1.    conditionOptions object you create =)
 2.    the form to be operated on as a node
 3.    an optional ajaxFunction to be used instead of submit()
