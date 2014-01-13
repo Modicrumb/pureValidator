@@ -77,6 +77,7 @@ First include the pureValidate function (pureValidate.js) in the head of your do
 Second set up your conditions. 
 Third grab the form object. var form = document.getElementById('form1'); for example
 Instantiate the function: 
+
     var phoneValidate = new pureValidate(conditions, form)
 
 
