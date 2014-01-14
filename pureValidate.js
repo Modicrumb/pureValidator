@@ -153,12 +153,16 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
         *** algorithmically finds submit button based on the type attribute (finds button with submit type)
         *** invokes validate on submit button click, note that it does not block a form from sending, rails or cake can do this
         *** if isValid is false it doesn't submit, if ajaxFunction is defined it uses that function instead of submit 
-        ***
+        *** if form allows submission without JS stop it and if it has a disabled attribute take it off
         **/
         for (var i=0; i < inputs.length; i++) {
             if (inputs[i].getAttribute('type') === 'submit' || inputs[i].getAttribute('type') === 'button') {
+                inputs[i].removeAttribute('disabled');
                 /* Handle submit buttons and resetting on change here*/
                 inputs[i].onclick = function() {
+                   form.onsubmit = function() {
+                        return false;
+                    }
                    Validator.validate();
                    if (isValid && ajaxFunction === undefined) {
                     form.submit();
