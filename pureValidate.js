@@ -8,11 +8,11 @@
 *** @this {pureValidate}
 *** @param {object} conditions, object describing inputs, conditions to check against, and alert messages
 *** @param {element} formElement, form for conditions to be operated on
-*** @param optional {function} ajaxFunction, function without parens to be executed replacing form.submit()
+*** @param optional {function} successCallback, function without parens to be executed replacing form.submit()
 ***
 ***/
 
-var pureValidate = function(conditions, formElement, ajaxFunction) {
+var pureValidate = function(conditions, formElement, successCallback) {
 
         this.conditions = conditions;   //adding conditions parameter to pureValidate object
         this.formElement = formElement; //adding form parameter to pureValidate object
@@ -160,7 +160,7 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
         /** Most "functional code" in pureValidate
         *** algorithmically finds submit button based on the type attribute (finds button with submit type)
         *** invokes validate on submit button click, note that it does not block a form from sending, rails or cake can do this
-        *** if isValid is false it doesn't submit, if ajaxFunction is defined it uses that function instead of submit 
+        *** if isValid is false it doesn't submit, if successCallback is defined it uses that function instead of submit 
         *** if form allows submission without JS stop it and if it has a disabled attribute take it off
         **/
         for (var i=0; i < inputs.length; i++) {
@@ -176,11 +176,11 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
                 return false;
             };
            Validator.validate();
-           if (isValid && ajaxFunction === undefined) {
+           if (isValid && successCallback === undefined) {
             form.submit();
            }
            else if (isValid) {
-            ajaxFunction(); 
+            successCallback(); 
            }
            //reset isValid
            isValid = true;
