@@ -30,17 +30,19 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
         ***/
         this.conditionCheck = function conditionCheck(conditionOptions , input) {
             if (conditionOptions.hasOwnProperty('empty')) {
-                if (input.value == "") {
+                if (input.value === "") {
                     return conditionOptions.empty;
                 }
             }
             if (conditionOptions.hasOwnProperty('match')) {
+                var inputAgainst; 
+                var matchKey;
                 //get name of first key
                 for (var key in conditionOptions.match)
                 {   
                     if (conditionOptions.match.hasOwnProperty(key)) {
-                        var matchKey = key;
-                        var inputAgainst = document.getElementById(matchKey);
+                        matchKey = key;
+                        inputAgainst = document.getElementById(matchKey);
                     }
                 }
                 if (input.value != inputAgainst.value ) {
@@ -55,7 +57,7 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
                     return message;
                 }
             }
-        }
+        };
 
         /** Taken from jQuery library checks values in a one dimensional array
         *** 
@@ -69,7 +71,7 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
                 if(haystack[i] == needle) return true;
             }
             return false;
-        }
+        };
 
         /** Grabs label right before various input, recursive function because uses dom level 1 previousSibling
         *** 
@@ -80,9 +82,9 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
                     if (node.previousSibling.nodeType === 1 && node.previousSibling.tagName === "LABEL")
                         return node.previousSibling;
                     else 
-                        var node = node.previousSibling;
+                        node = node.previousSibling;
                         return getLabel(node); 
-                }
+                };
 
         /** Resets the span message within an input to be null
         *** 
@@ -91,11 +93,11 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
         ***/
         this.resetMessage = function resetMessage(input) {
             var thisKey = input.getAttribute('id');
-            var innerSpan = document.getElementById(thisKey + "_validate")
+            var innerSpan = document.getElementById(thisKey + "_validate");
             if (innerSpan !== null) {
                 innerSpan.innerHTML = '';
             }
-        }
+        };
 
          /** Function at the heart of pureValidate
         *** 
@@ -112,9 +114,7 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
                     var msgText = Validator.conditionCheck(conditionOptions,input);
                     var assocLabel = Validator.getLabel(input);
                     //here I am setting it so that it the text resets on change
-                    input.onchange = function() {
-                        Validator.resetMessage(this);
-                    }
+                    input.onchange = resetField(input);
                     if (msgText !== undefined)
                     {
                         isValid = false;
@@ -127,7 +127,7 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
                         if (existingSpan === null) {
                             //check all over span HTML to be able to compare with new span
                             var spanLabel = assocLabel.getElementsByTagName('span');
-                            var compArray = new Array();
+                            var compArray = [];
                             for (var j = 0; j < spanLabel.length; j++) {
                                 compArray.push(spanLabel[j].innerHTML);
                             }
@@ -147,7 +147,12 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
                     }
                 }
             }
-        }
+            
+            function resetField(input) {
+                Validator.resetMessage(input);
+            }
+            
+        };
 
         /** Most "functional code" in pureValidate
         *** algorithmically finds submit button based on the type attribute (finds button with submit type)
@@ -159,21 +164,22 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
             if (inputs[i].getAttribute('type') === 'submit' || inputs[i].getAttribute('type') === 'button') {
                 inputs[i].removeAttribute('disabled');
                 /* Handle submit buttons and resetting on change here*/
-                inputs[i].onclick = function() {
-                   form.onsubmit = function() {
-                        return false;
-                    }
-                   Validator.validate();
-                   if (isValid && ajaxFunction === undefined) {
-                    form.submit();
-                   }
-                   else if (isValid) {
-                    ajaxFunction(); 
-                   }
-                   //reset isValid
-                   isValid = true;
-                };
+                inputs[i].onclick = submitAndReset();
             }
         }
-
-    }
+            
+        function submitAndReset() {
+           form.onsubmit = function() {
+                return false;
+            };
+           Validator.validate();
+           if (isValid && ajaxFunction === undefined) {
+            form.submit();
+           }
+           else if (isValid) {
+            ajaxFunction(); 
+           }
+           //reset isValid
+           isValid = true;
+        }
+    };
