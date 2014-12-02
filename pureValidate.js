@@ -120,6 +120,7 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
                         isValid = false;
                         var spanInner = document.createElement('span');
                         spanInner.setAttribute('id',key + "_validate");
+                        spanInner.setAttribute('class', "validationMsg");
                         var txtNode = document.createTextNode(" " + msgText);
                         spanInner.appendChild(txtNode);
                         var existingSpan = document.getElementById(key + "_validate");
@@ -149,7 +150,9 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
             }
             
             function resetField(input) {
-                Validator.resetMessage(input);
+                return function(){
+                    Validator.resetMessage(input);
+                }
             }
             
         };
@@ -164,7 +167,7 @@ var pureValidate = function(conditions, formElement, ajaxFunction) {
             if (inputs[i].getAttribute('type') === 'submit' || inputs[i].getAttribute('type') === 'button') {
                 inputs[i].removeAttribute('disabled');
                 /* Handle submit buttons and resetting on change here*/
-                inputs[i].onclick = submitAndReset();
+                inputs[i].onclick = submitAndReset;
             }
         }
             
