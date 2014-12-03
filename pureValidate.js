@@ -13,7 +13,9 @@
 ***/
 
 var pureValidate = function(conditions, formElement, successCallback) {
-
+        if(!conditions || !formElement){
+            throw "invalid parameters exception";
+        }
         this.conditions = conditions;   //adding conditions parameter to pureValidate object
         this.formElement = formElement; //adding form parameter to pureValidate object
 
@@ -152,7 +154,7 @@ var pureValidate = function(conditions, formElement, successCallback) {
             function resetField(input) {
                 return function(){
                     Validator.resetMessage(input);
-                }
+                };
             }
             
         };

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QUnit Example</title>
+  <link rel="stylesheet" href="qunit-1.15.0.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture">
+            <form accept-charset="UTF-8" class="new_user" data-remote="true" id="new-user-form" method="post">
+            <div class="input-text">
+                <label for="username">Username </label>
+                <input id="user_username" name="user[username]" type="text" />
+            </div>
+            <div class="input-text">
+                <label for="password">Password</label>
+                <input id="user_password" name="user[password]" type="password" />
+            </div>
+            <div class="input-text">
+                <label for="email">Email</label>
+                <input id="user_email" name="user[email]" type="email" />
+            </div>
+            <div class="input-text">
+                <label for="confirmEmail">Confirm Email</label>
+                <input id="user_confirmEmail"  type="email" />
+            </div>
+            <label for="ding-dong"> Ding Dong </label>
+            <input id="phone_area" type="text" />
+            <input id="phone_number" type="text" />
+            <input class="form-submit" name="commit" disabled type="button" value="CREATE USER" />
+        </form>
+    </div>
+        <script src="../pureValidate.js"></script>
+  <script src="qunit-1.15.0.js"></script>
+  <script src="tests.js"></script>
+</body>
+</html>
