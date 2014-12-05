@@ -28,9 +28,9 @@ var pureValidate = function(conditions, formElement, successCallback) {
         *** 
         *** @param {object} conditionOptions, object describing conditions to check against, and alert messages specific to inputs
         *** @param {element} input, input being operated on
-        *** return message string to output into a span
+        *** return message string to output
         ***/
-        this.conditionCheck = function conditionCheck(conditionOptions , input) {
+        this.conditionCheck = function (conditionOptions , input) {
             if (conditionOptions.hasOwnProperty('empty')) {
                 if (input.value === "") {
                     return conditionOptions.empty;
