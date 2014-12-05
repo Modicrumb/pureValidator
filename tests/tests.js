@@ -80,3 +80,16 @@ QUnit.test("function pureValidate.conditionCheck should return me the validation
     var validateMsg = this.validator.conditionCheck({regex: {match: /[a-z]{3}\d{3}[a-z]{3}/, message:'doesn\'t match regexp'}}, document.getElementById('notregexpmatch'));
     assert.ok(validateMsg === 'doesn\'t match regexp', "returns" + validateMsg + "checks if validator acknowledges an empty field");
 });
+
+QUnit.test("function pureValidate.getLabel should return me the corresponding label node", function(assert){
+    var labelNode1 = this.validator.getLabel(document.getElementById('mismatchtextone'));
+    assert.ok(labelNode1.innerHTML === 'mismatch one', 'returned ' + labelNode1.innerHTML);
+    var labelNode2 = this.validator.getLabel(document.getElementById('mismatchtexttwo'));
+    assert.ok(labelNode2.innerHTML === 'mismatch two', 'returned ' + labelNode2.innerHTML);
+    var labelNode3 = this.validator.getLabel(document.getElementById('labeltestone'));
+    assert.ok(labelNode3.innerHTML === 'labeltestone', 'returned ' + labelNode3.innerHTML);
+    var labelNode4 = this.validator.getLabel(document.getElementById('labeltestmultione'));
+    assert.ok(labelNode4.innerHTML === 'label test multi one', 'returned ' + labelNode4.innerHTML);
+    var labelNode5 = this.validator.getLabel(document.getElementById('labeltestnotexist'));
+    assert.ok(labelNode5 === undefined);
+});
