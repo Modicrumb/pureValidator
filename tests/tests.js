@@ -93,3 +93,35 @@ QUnit.test("function pureValidate.getLabel should return me the corresponding la
     var labelNode5 = this.validator.getLabel(document.getElementById('labeltestnotexist'));
     assert.ok(labelNode5 === undefined);
 });
+
+QUnit.test("function pureValidate.resetMessage should reset the span message tied to the corresponding input", function(assert){
+    assert.ok(document.getElementById('spanmessage_validate').innerHTML === 'a validation message', 'pre resetMessage');
+    this.validator.resetMessage(document.getElementById('spanmessage'));
+    assert.ok(document.getElementById('spanmessage_validate').innerHTML === '', 'post resetMessage');
+});
+
+QUnit.test("function validate should create appropriate validation spans with messages specified in passed in configuration parameter", function(assert){
+    //validation span doesn't exist prior
+    assert.ok(!document.getElementById('user_username_validate'));
+    this.validator.validate();
+    //validation span exists after validate function 
+    var validationSpan = document.getElementById('user_username_validate')
+    assert.ok(validationSpan);
+    //and it has the correct corresponding text
+    assert.ok(validationSpan.innerHTML === 'Please provide a username');
+});
+
+QUnit.test("function validate should not create a span with a validation message when input fulfills validation requirements", function(assert){
+    var input = document.getElementById('user_username');
+    input.value = 'username';
+    //validation span doesn't exist prior
+    assert.ok(!document.getElementById('user_username_validate'));
+    
+    this.validator.validate();
+    //validation span not exists after
+    assert.ok(!document.getElementById('user_username_validate'));
+});
+//
+//QUnit.test("successCallback should be called when all validations pass", function(assert){
+//     
+//});

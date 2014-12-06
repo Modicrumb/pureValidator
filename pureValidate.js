@@ -88,10 +88,10 @@ var pureValidate = function(conditions, formElement, successCallback) {
                         return getLabel(node); 
                 };
 
-        /** Resets the span message within an input to be null
+        /** Resets the span message within an input to be ''
         *** 
         *** @param {element} input, object describing conditions to check against, and alert messages specific to inputs
-        *** return label element
+        *** return void, changes label element innerHTML
         ***/
         this.resetMessage = function resetMessage(input) {
             var thisKey = input.getAttribute('id');
@@ -105,7 +105,7 @@ var pureValidate = function(conditions, formElement, successCallback) {
         *** 
         *** operates on conditionOptions and invokes resetMessage onchange on inputs specified
         *** invokes conditionCheck to get message based on value that is currently in input
-        *** intelligently creates message alert spams and removes span text
+        *** intelligently creates message alert spans and removes span text
         ***
         ***/
         this.validate = function validate() {
@@ -116,14 +116,14 @@ var pureValidate = function(conditions, formElement, successCallback) {
                     var msgText = Validator.conditionCheck(conditionOptions,input);
                     var assocLabel = Validator.getLabel(input);
                     //here I am setting it so that it the text resets on change
-                    input.onchange = resetField(input);
+                    input.onchange = resetValidationMessage(input);
                     if (msgText !== undefined)
                     {
                         isValid = false;
                         var spanInner = document.createElement('span');
                         spanInner.setAttribute('id',key + "_validate");
                         spanInner.setAttribute('class', "validationMsg");
-                        var txtNode = document.createTextNode(" " + msgText);
+                        var txtNode = document.createTextNode(msgText);
                         spanInner.appendChild(txtNode);
                         var existingSpan = document.getElementById(key + "_validate");
                         /* Only append span if it doesn't exist and innerHTML appended is unique*/
@@ -151,7 +151,7 @@ var pureValidate = function(conditions, formElement, successCallback) {
                 }
             }
             
-            function resetField(input) {
+            function resetValidationMessage(input) {
                 return function(){
                     Validator.resetMessage(input);
                 };
