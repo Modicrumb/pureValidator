@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QUnit Example</title>
+  <link rel="stylesheet" href="qunit-1.15.0.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture">
+            <form accept-charset="UTF-8" class="new_user" data-remote="true" id="new-user-form" method="post">
+            <div class="input-text">
+                <label for="mismatchtextone">mismatch one</label>
+                <input id="mismatchtextone" type="text" value="mismatching text one"/>
+            </div>
+            <div class="input-text">
+                <label for="mismatchtexttwo">mismatch two</label>
+                <input id="mismatchtexttwo" type="text" value="mismatching text two"/>
+            </div>
+            <div class="input-text">
+                <label for="matchingtextone">matchingtextone </label>
+                <input id="matchingtextone" type="text" value="matching text"/>
+            </div>
+            <div class="input-text">
+                <label for="matchingtexttwo">matchingtexttwo</label>
+                <input id="matchingtexttwo" type="text" value="matching text"/>
+            </div>
+            <div class="input-text">
+                <label for="emptyvalue">emptyvalue</label>
+                <input id="emptyvalue" type="text" value=""/>
+            </div>
+            <div class="input-text">
+                <label for="regexpmatch">regexpmatch</label>
+                <input id="regexpmatch" type="text" value="abc123def"/>
+            </div>
+            <div class="input-text">
+                <label for="notregexpmatch">notregexpmatch</label>
+                <input id="notregexpmatch" type="text" value="873din233"/>
+            </div>
+            <div class="input-text">
+                <label for="labeltestone">labeltestone</label>
+                <p>filler paragraph</p>
+                <p>filler paragraph</p>
+                <p>filler paragraph</p>
+                <p>filler paragraph</p>
+                <input id="labeltestone" type="text"/>
+            </div>
+            <div class="input-text">
+                <label for="labeltestmultione">label test multi one</label>
+                <label for="labeltestmultitwo">label test multi two</label>
+                <input id="labeltestmultione" type="text"/>
+                <input id="labeltestmultitwo" type="text"/>
+            </div>
+            <div class="input-text">
+                <input id="labeltestnotexist" type="text"/>
+            </div>
+            <div class="input-text">
+                <span id="spanmessage_validate">a validation message</span>
+                <input id="spanmessage" type="text"/>
+            </div>
+            <div class="input-text">
+                <label for="username">Username </label>
+                <input id="user_username" name="user[username]" type="text" />
+            </div>
+            <div class="input-text">
+                <label for="password">Password</label>
+                <input id="user_password" name="user[password]" type="password" />
+            </div>
+            <div class="input-text">
+                <label for="email">Email</label>
+                <input id="user_email" name="user[email]" type="email" />
+            </div>
+            <div class="input-text">
+                <label for="confirmEmail">Confirm Email</label>
+                <input id="user_confirmEmail"  type="email" />
+            </div>
+            <label for="ding-dong"> Ding Dong </label>
+            <input id="phone_area" type="text" />
+            <input id="phone_number" type="text" />
+            <input class="form-submit" name="commit" disabled type="button" value="CREATE USER" />
+        </form>
+    </div>
+        <script src="../pureValidate.js"></script>
+  <script src="qunit-1.15.0.js"></script>
+  <script src="tests.js"></script>
+</body>
+</html>
